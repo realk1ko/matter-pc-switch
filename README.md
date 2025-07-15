@@ -4,42 +4,62 @@
 
 [![License](https://img.shields.io/github/license/realk1ko/matter-pc-switch.svg)](https://github.com/realk1ko/matter-pc-switch/blob/master/LICENSE)
 
-A small device allowing you to check and control your PC's power state with Siri, Google Assistant, Alexa and any other
-ecosystem supporting Matter.
+Remotely control your PC from any smart home platform that support the Matter and Thread standards (Apple Home, Google
+Home, Amazon Alexa, Home Assistant, …).
 
-## Components
+## Features
 
-- 1x Arduino Nano Matter
-- 2x PC817 optocoupler
-- 2x 1 kΩ resistor (to limit current to the optocouplers)
-- 1x 10 kΩ resistor (as pulldown)
-- 1x prototyping board or breadboard
-- Wires and headers as needed
+* Remote power on, shutdown and sleep with ecosystem apps, voice assistants or automation rules
+* Power state feedback (the PC appears as an outlet accessory)
+* Full local control without a cloud account (depending on your smart home platform)
+* Should work with any ATX based motherboard that exposes a front panel power button header
+* Fits on a tiny perf-board and is powered directly from the PC (5V RGB header or internal USB)
+* Uses Matter-over-Thread
+
+## Bill of Materials
+
+| Quantity | Part                       | Notes                                                                                                                             |
+|----------|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| 1        | Arduino Nano Matter        |                                                                                                                                   |
+| 2        | PC817 optocoupler          | interfaces power button and power LED                                                                                             |
+| 2        | 1 kΩ resistor              | current limit for LED side of each PC817                                                                                          |
+| 1        | 10 kΩ resistor             | pulldown for power state sensing                                                                                                  |
+| 1        | perf-board                 |                                                                                                                                   |
+| 1        | Thread Border Router       | refer to this [article](https://www.matteralpha.com/frequently-asked-questions/complete-list-thread-border-routers) for more info |
+| -        | Assorted headers and wires | as required                                                                                                                       |
 
 ## Assembly
 
-1. Flash the sketch (`matter-pc-switch.ino`) onto your Arduino. Optionally
-   flash [unique provisioning data](#a-note-on-matter-pairing-codes) **afterwards**.
-2. Pair the Arduino with your ecosystem: A QR code and the manual pairing code are printed to the serial console upon
-   startup of the Arduino. You can reset the pairing on the Arduino by pressing the user button, which can be helpful if
-   the pairing process fails.
-3. Optionally configure your OS to put your PC to sleep when the power button is pressed, if you prefer standby for a
-   quicker startup.
-4. Optionally configure the BIOS to keep RGB LEDs on during sleep and/or off states, if you'd like to use an RGB LED
-   header on your mainboard as power source for the Arduino. Alternatively an internal USB port can be used too.
-5. Continue with the assembly of the device according to the [wiring schematic](#wiring-schematic).
-6. Once everything is up and running again, you should be able to control your PC within your smart home platform. The
-   Arduino's onboard LED should sync with the power state of your PC.
+1. **Flash the Firmware:**  
+   Upload the sketch `matter-pc-switch.ino` to the Arduino using
+   the [Arduino IDE](https://www.arduino.cc/en/software/). Flash unique provisioning data **after** the sketch,
+   see [Matter Pairing Codes](#matter-pairing-codes) below.
+
+2. **Pair With Your Smart Home Platform:**  
+   On first boot the serial console prints a QR code and manual setup code you can enter in your smart home platform. If
+   the pairing process fails, press the onboard user button to reset the Matter pairing process and try again.
+
+3. **Prepare the PC**:  
+   In your OS, configure the power button behavior (shutdown or sleep) depending on your preference. In the BIOS, enable
+   USB/RGB power in sleep/off states when powering the Arduino from an USB or RGB header.
+
+4. **Wire the Hardware:**  
+   Follow the schematic below. One optocoupler simulates a power button press, the other senses the motherboard’s power
+   LED so the Arduino always senses whether the PC is on or off.
+
+5. **Enjoy Hands-Free Control**  
+   The PC shows up as an outlet accessory named “Computer” in your smart home platform. Control it using voice commands
+   or using the ecosystem apps.
 
 ## Wiring Schematic
 
 ![Schematic](schematic.png)
 
-## A Note on Matter Pairing Codes
+## Matter Pairing Codes
 
-The Arduino Nano Matter comes with test provisioning data out of the factory, which consequently means all boards use
-the same Matter pairing code `3497-011-2332`.
+The Arduino Nano Matter ships with test provisioning data. All boards therefore per default use the same Matter pairing
+code `3497-011-2332`.
 
-To make sure your Arduino has a unique pairing code, you can use
-the [Arduino Matter Provision Tool](https://github.com/SiliconLabs/arduino/blob/main/extra/arduino_matter_provision/readme.md#arduino-matter-provision-tool)
-by Silicon Labs to flash unique provisioning data.
+For production use, you should flash unique provisioning data to ensure your Arduino has a unique pairing code. Silicon
+Labs provides a simple utility for
+this: [Arduino Matter Provision Tool](https://github.com/SiliconLabs/arduino/blob/main/extra/arduino_matter_provision/readme.md#arduino-matter-provision-tool)
