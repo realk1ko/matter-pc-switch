@@ -21,12 +21,12 @@ Home, Amazon Alexa, Home Assistant, …).
 | Quantity | Part                       | Notes                                                                                                                             |
 |----------|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
 | 1        | Arduino Nano Matter        |                                                                                                                                   |
-| 2        | PC817 optocoupler          | interfaces power button and power LED                                                                                             |
-| 2        | 1 kΩ resistor              | current limit for LED side of each PC817                                                                                          |
-| 1        | 10 kΩ resistor             | pulldown for power state sensing                                                                                                  |
-| 1        | perf-board                 |                                                                                                                                   |
-| 1        | Thread Border Router       | refer to this [article](https://www.matteralpha.com/frequently-asked-questions/complete-list-thread-border-routers) for more info |
-| -        | Assorted headers and wires | as required                                                                                                                       |
+| 2        | PC817 optocoupler          | Interfaces power button and power LED                                                                                             |
+| 2        | 1 kΩ resistor              | Current limit for LED side of each PC817                                                                                          |
+| 1        | 10 kΩ resistor             | Pulldown for power state sensing                                                                                                  |
+| 1        | Perf-board                 |                                                                                                                                   |
+| 1        | Thread Border Router       | Refer to this [article](https://www.matteralpha.com/frequently-asked-questions/complete-list-thread-border-routers) for more info |
+| -        | Assorted headers and wires | As required                                                                                                                       |
 
 ## Assembly
 
