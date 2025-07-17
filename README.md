@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/realk1ko/matter-pc-switch.svg)](https://github.com/realk1ko/matter-pc-switch/blob/master/LICENSE)
 
 Remotely control your PC from any smart home platform that support the Matter and Thread standards (Apple Home, Google
-Home, Amazon Alexa, Home Assistant, …).
+Home, Amazon Alexa, Home Assistant, ...).
 
 ## Features
 
@@ -48,7 +48,7 @@ Home, Amazon Alexa, Home Assistant, …).
    LED so the Arduino always senses whether the PC is on or off.
 
 5. **Enjoy Hands-Free Control**  
-   The PC shows up as an outlet accessory named “Computer” in your smart home platform. Control it using voice commands
+   The PC shows up as an outlet accessory named "Computer" in your smart home platform. Control it using voice commands
    or using the ecosystem apps.
 
 ## Wiring Schematic
